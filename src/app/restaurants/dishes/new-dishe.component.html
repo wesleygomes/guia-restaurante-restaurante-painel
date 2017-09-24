@@ -1,0 +1,39 @@
+<div id="modal1" class="modal bottom-sheet">
+    <div class="modal-content">
+        <h4><i class="material-icons">keyboard_arrow_right</i>Novo prato <small class="grey-text">insira o prato</small></h4>
+
+        <form class="row" (submit)="save($event)">
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>Foto</span>
+                    <input type="file" (change)="addFile($event)">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+
+            <div class="input-field col s12">
+                <input id="name" name="name" type="text" class="validate" aria-required="true" placeholder="Prato" [(ngModel)]="dish.name"
+                    required>
+                <label for="name" data-error="Informe nome do prato">Nome do prato</label>
+            </div>
+
+            <div class="input-field col s12">
+                <textarea id="description" name="description" class="materialize-textarea validate" aria-required="true" placeholder="Descrição"
+                    [(ngModel)]="dish.description" required></textarea>
+                <label for="description" data-error="Informe a descrição">Descrição</label>
+            </div>
+
+            <div class="input-field col s12">
+                <input id="price" name="price" type="text" class="validate" aria-required="true" placeholder="Valor" [(ngModel)]="dish.price"
+                    required>
+                <label for="price" data-error="Informe o preço">Valor</label>
+            </div>
+
+            <div class="input-field col s12">
+                <input type="submit" value="Salvar" class="btn">
+            </div>
+        </form>
+    </div>
+</div>

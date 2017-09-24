@@ -1,0 +1,116 @@
+<div class="row">
+    <div class="col s12">
+        <h4><i class="material-icons">keyboard_arrow_right</i>Restaurante <small class="grey-text">atualize os dados do restaurante</small></h4>
+    </div>
+
+    <div class="col s9">
+        <form class="row" (submit)="save($event)">
+            <div class="input-field col s12">
+                <input type="text" id="name" name="name" class="validate" aria-required="true" placeholder="Nome" [(ngModel)]="restaurant.name"
+                    required>
+                <label for="name" data-error="Informe nome">Nome do restaurante</label>
+            </div>
+            <div class="input-field col s12">
+                <input type="text" id="phone" name="phone" class="validate" aria-required="true" placeholder="Telefone" [(ngModel)]="restaurant.phone"
+                    required>
+                <label for="phone" data-error="Informe o telefone">Telefone do restaurante</label>
+            </div>
+            <div class="input-field col s12">
+                <textarea id="description" name="description" class="materialize-textarea validate" aria-required="true" placeholder="Descrição"
+                    [(ngModel)]="restaurant.description" required></textarea>
+                <label for="description" data-error="Informe a descrição">Descrição do restaurante</label>
+            </div>
+            <div class="input-field col s4">
+                <input type="text" id="cep" name="cep" class="validate" aria-required="true" [(ngModel)]="address.cep" placeholder="Cep"
+                    (keyup)="searchCep()" required>
+                <label for="cep" data-error="Informe o cep">CEP</label>
+            </div>
+            <div class="input-field col s9">
+                <input type="text" id="address" name="address" class="validate" aria-required="true" [(ngModel)]="address.address"
+                    placeholder="Endereço" class="validate">
+                <label for="address" data-error="Informe o endereço">Endereço</label>
+            </div>
+            <div class="input-field col s3">
+                <input type="text" id="number" name="number" class="validate" aria-required="true" [(ngModel)]="address.number"
+                    placeholder="Número">
+                <label for="number" data-error="Informe o número">Número</label>
+            </div>
+            <div class="input-field col s6">
+                <input type="text" id="city" name="city" class="validate" aria-required="true" [(ngModel)]="address.city" placeholder="Cidade"
+                    required>
+                <label for="city" data-error="Informe a cidade">Cidade</label>
+            </div>
+            <div class="input-field col s6">
+                <input type="text" id="state" name="state" class="validate" aria-required="true" [(ngModel)]="address.state"
+                    placeholder="Estado" required>
+                <label for="state" data-error="Informe o estado">Estado</label>
+            </div>
+            <div class="input-field col s6">
+                <input type="text" id="neighborhood" name="neighborhood" class="validate" aria-required="true" [(ngModel)]="address.neighborhood"
+                    placeholder="Bairro" required>
+                <label for="neighborhood" data-error="Informe o bairro">Bairro</label>
+            </div>
+            <div class="input-field col s6">
+                <input type="text" id="complement" name="complement" [(ngModel)]="address.complement" placeholder="Complemento">
+                <label for="complement">Complemento</label>
+            </div>
+            <div class="input-field col s12">
+                <input type="submit" value="Salvar" class="btn">
+            </div>
+        </form>
+    </div>
+    <div class="col s3">
+        <div class="card-panel white-text center-align photo-changer" [ngClass]="
+            {
+                'lighten-1': dragging,
+                'grey': upload_status === 'not',
+                'amber': upload_status === 'sending',
+                'green': upload_status === 'success',
+                'red': upload_status === 'error'
+            }" (click)="file.click()" (drop)="upload($event)" (dragover)="dragover($event)" (dragleave)="dragging = false">
+            <i class="material-icons">insert_photo</i>
+            <p *ngIf="!dragging;else release">Arraste sua foto aqui ou clique para enviar</p>
+            <ng-template #release>
+                <p *ngIf="upload_status === 'not'">Solte para enviar</p>
+                <p *ngIf="upload_status === 'sending'">Enviando, aguarde...</p>
+                <p *ngIf="upload_status === 'success'">Enviado com sucesso, você pode arrastar ou clicar aqui para enviar outra</p>
+                <p *ngIf="upload_status === 'error'">Erro ao enviar, tente novamente ou contate o administrador do sistema</p>
+            </ng-template>
+            <input type="file" accept="image/*" #file style="display: none" (change)="upload($event)">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content">
+                <div class="row">
+                    <div class="col s12 margin-bottom">
+                        <span class="card-title">Fotos do restaurante</span>
+                    </div>
+                    <div class="col s3 margin-bottom" *ngFor="let photo of photos">
+                        <img class="materialboxed responsive-img" width="650" src="{{photo.full_url}}">
+                        <a class="btn" (click)="deletePhoto(photo)"><i class="material-icons">cancel</i></a>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <div class="row">
+                        <div class="file-field input-field s9">
+                            <div class="btn">
+                                <span>Foto</span>
+                                <input type="file" (change)="preparePhoto($event)">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                        <div class="input-field s3 right align">
+                            <input type="submit" [value]="send_foto" class ="btn " [ngClass]="{'disabled': send_foto === 'Enviando....'}" (click)="sendPhoto()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
