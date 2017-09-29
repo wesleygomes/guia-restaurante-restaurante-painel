@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  server_url: 'https://api-guia-restaurantes.herokuapp.com',
-  client_id: '11',
-  client_secret: 'Klta3PfQbPOppqdIX5uyw79qfOfutfomQZAepTNb'
+  server_url: 'http://localhost:8000',
+  client_id: '',
+  client_secret: ''
 };

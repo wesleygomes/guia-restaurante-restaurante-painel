@@ -4,6 +4,8 @@ import { AppHttpService } from './app-http.service';
 
 import { environment } from './../../environments/environment';
 
+import 'rxjs/add/operator/toPromise';
+
 @Injectable()
 export class AuthService extends AppHttpService {
 
