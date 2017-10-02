@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-//import { MdProgressSpinnerModule } from '@angular/material';
+import { FormControl } from '@angular/forms';
+
 import * as jQuery from 'jquery';
 
 import { RestaurantService } from './../services/restaurant.service';
@@ -18,6 +19,7 @@ export class EditComponent implements OnInit {
     dragging: boolean = false;
     upload_status: string = 'not';
     send_foto: string = 'Enviar';
+    update_restaurante: string = 'Salvar';
     restaurantPhoto: any = null;
 
 
@@ -97,33 +99,10 @@ export class EditComponent implements OnInit {
         }
     }
 
-    save(e) {
+    save(frm: FormControl, e) {
         e.preventDefault();
-
-        // if (this.restaurant.name === null) {
-        //     window.Materialize.toast('Informe o nome do restaurante', 3000, 'red');
-        //     return;
-        // }
-        // if (this.restaurant.description === null) {
-        //     window.Materialize.toast('Informe a descrição do restaurante', 3000, 'red');
-        //     return;
-        // }
-        // if (this.address.cep === null || this.address.cep == 0) {
-        //     window.Materialize.toast('Informe o cep', 3000, 'red');
-        //     return;
-        // }
-        // if (this.address.address === null) {
-        //     window.Materialize.toast('Informe o endereço', 3000, 'red');
-        //     return;
-        // }
-        // if (this.address.number === null || this.address.number == 0) {
-        //     window.Materialize.toast('Informe o número', 3000, 'red');
-        //     return;
-        // }
-        // if (this.address.city === null) {
-        //     window.Materialize.toast('Informe a cidade', 3000, 'red');
-        //     return;
-        // }
+        
+        this.update_restaurante = 'Salvando...';
 
         this.restaurantService.builder()
             .update(this.restaurant.id, this.restaurant)
@@ -133,7 +112,8 @@ export class EditComponent implements OnInit {
             })
             .then(() => {
                 window.Materialize.toast('Dados atualizados com sucesso!!!', 3000, 'rounded');
-            })
+                this.update_restaurante = 'Salvar';
+            });
     }
 
     preparePhoto(e) {
@@ -157,7 +137,7 @@ export class EditComponent implements OnInit {
             .then(() => {
                 this.send_foto = 'Enviar';
                 window.Materialize.toast('Foto cadastrada com sucesso!!!', 3000, 'rounded');
-
+                
                 return this.restaurantService.builder('/' + this.restaurant.id + '/photos')
                     .list();
             }).then((res) => {
@@ -170,6 +150,7 @@ export class EditComponent implements OnInit {
         this.restaurantService.builder('/photos')
             .delete(photo.id)
             .then(() => {
+                window.Materialize.toast('Foto excluida com sucesso!!!', 3000, 'rounded');
                 return this.restaurantService.builder('/' + this.restaurant.id + '/photos')
                     .list();
             }).then((res) => {

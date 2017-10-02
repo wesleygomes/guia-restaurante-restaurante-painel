@@ -5,19 +5,19 @@
 
     <div class="col s12">
         <div class="card-panel">
-            <form class="row" (submit)="save($event)">
+            <form #frm="ngForm" class="row" (submit)="save($event, frm)" autocomplete="off">
                 <div class="input-field col s12">
-                    <input id="name" name="name" type="text" placeholder="Nome" [(ngModel)]="user.name">
+                    <input id="name" name="name" type="text" placeholder="Nome" [(ngModel)]="user.name" [required]="true">
                     <label for="name">Nome</label>
                 </div>
 
                 <div class="input-field col s12">
-                    <input id="email" name="email" type="email" placeholder="E-mail" [(ngModel)]="user.email">
+                    <input id="email" name="email" type="email" placeholder="E-mail" [(ngModel)]="user.email" [required]="true">
                     <label for="email">E-mail</label>
                 </div>
 
                 <div class="input-field col s12">
-                    <input type="submit" value="Salvar" class="btn">
+                    <input type="submit" [value]="update_profile" class="btn" [ngClass]="{'disabled': update_profile === 'Salvando...'}" [disabled]="frm.invalid">
                 </div>
             </form>
         </div>

@@ -30,17 +30,22 @@ export class DishesComponent implements OnInit {
                 }
                 this.dishesService.eventEmiter
                     .subscribe(() => {
-                        this.dishesService.builder().list(options).then((rs) => {
-                            this.dishes = rs;
-                        })
+                        this.dishesService.builder()
+                            .list(options)
+                            .then((rs) => {
+                                this.dishes = rs;
+                            });
                     })
                 this.dishesService.eventEmiter.emit();
             });
     }
 
     remove(id: number) {
-        this.dishesService.builder().delete(id).then(() => {
-            this.dishesService.eventEmiter.emit();
-        });
+        this.dishesService.builder()
+            .delete(id)
+            .then(() => {
+                window.Materialize.toast('Prato excluido com sucesso!!!', 3000, 'rounded');
+                this.dishesService.eventEmiter.emit();
+            });
     }
 }

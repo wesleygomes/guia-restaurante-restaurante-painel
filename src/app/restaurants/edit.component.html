@@ -4,58 +4,58 @@
     </div>
 
     <div class="col s9">
-        <form class="row" (submit)="save($event)">
+        <form #frm="ngForm" class="row" (submit)="save(frm, $event)" autocomplete="off">
             <div class="input-field col s12">
                 <input type="text" id="name" name="name" class="validate" aria-required="true" placeholder="Nome" [(ngModel)]="restaurant.name"
-                    required>
+                    [required]="true">
                 <label for="name" data-error="Informe nome">Nome do restaurante</label>
             </div>
             <div class="input-field col s12">
                 <input type="text" id="phone" name="phone" class="validate" aria-required="true" placeholder="Telefone" [(ngModel)]="restaurant.phone"
-                    required>
+                    [required]="true">
                 <label for="phone" data-error="Informe o telefone">Telefone do restaurante</label>
             </div>
             <div class="input-field col s12">
                 <textarea id="description" name="description" class="materialize-textarea validate" aria-required="true" placeholder="Descrição"
-                    [(ngModel)]="restaurant.description" required></textarea>
+                    [(ngModel)]="restaurant.description" [required]="true"></textarea>
                 <label for="description" data-error="Informe a descrição">Descrição do restaurante</label>
             </div>
             <div class="input-field col s4">
                 <input type="text" id="cep" name="cep" class="validate" aria-required="true" [(ngModel)]="address.cep" placeholder="Cep"
-                    (keyup)="searchCep()" required>
-                <label for="cep" data-error="Informe o cep">CEP</label>
+                    (keyup)="searchCep()" [required]="true">
+                <label for="cep" data-error="Informe o cep">Informe o CEP</label>
             </div>
             <div class="input-field col s9">
-                <input type="text" id="address" name="address" class="validate" aria-required="true" [(ngModel)]="address.address"
-                    placeholder="Endereço" class="validate">
+                <input type="text" id="address" name="address" class="validate" aria-required="true" [(ngModel)]="address.address" placeholder="Endereço"
+                    class="validate">
                 <label for="address" data-error="Informe o endereço">Endereço</label>
             </div>
             <div class="input-field col s3">
-                <input type="text" id="number" name="number" class="validate" aria-required="true" [(ngModel)]="address.number"
-                    placeholder="Número">
+                <input type="text" id="number" name="number" class="validate" aria-required="true" [(ngModel)]="address.number" placeholder="Número">
                 <label for="number" data-error="Informe o número">Número</label>
             </div>
             <div class="input-field col s6">
                 <input type="text" id="city" name="city" class="validate" aria-required="true" [(ngModel)]="address.city" placeholder="Cidade"
-                    required>
-                <label for="city" data-error="Informe a cidade">Cidade</label>
+                    [required]="true">
+                <label for="city" data-error="Informe a cidade">Informe a cidade</label>
             </div>
             <div class="input-field col s6">
-                <input type="text" id="state" name="state" class="validate" aria-required="true" [(ngModel)]="address.state"
-                    placeholder="Estado" required>
-                <label for="state" data-error="Informe o estado">Estado</label>
+                <input type="text" id="state" name="state" class="validate" aria-required="true" [(ngModel)]="address.state" placeholder="Estado"
+                    [required]="true">
+                <label for="state" data-error="Informe o estado">Informe o estado</label>
             </div>
             <div class="input-field col s6">
                 <input type="text" id="neighborhood" name="neighborhood" class="validate" aria-required="true" [(ngModel)]="address.neighborhood"
-                    placeholder="Bairro" required>
-                <label for="neighborhood" data-error="Informe o bairro">Bairro</label>
+                    placeholder="Bairro" [required]="true">
+                <label for="neighborhood" data-error="Informe o bairro">Informe o bairro</label>
             </div>
             <div class="input-field col s6">
                 <input type="text" id="complement" name="complement" [(ngModel)]="address.complement" placeholder="Complemento">
                 <label for="complement">Complemento</label>
             </div>
             <div class="input-field col s12">
-                <input type="submit" value="Salvar" class="btn">
+                <input type="submit" [value]="update_restaurante" class="btn" [ngClass]="{'disabled': update_restaurante === 'Salvando...'}"
+                    [disabled]="frm.invalid">
             </div>
         </form>
     </div>
@@ -106,7 +106,7 @@
                             </div>
                         </div>
                         <div class="input-field s3 right align">
-                            <input type="submit" [value]="send_foto" class ="btn " [ngClass]="{'disabled': send_foto === 'Enviando....'}" (click)="sendPhoto()">
+                            <input type="submit" [value]="send_foto" class="btn " [ngClass]="{'disabled': send_foto === 'Enviando....'}" (click)="sendPhoto()">
                         </div>
                     </div>
                 </div>

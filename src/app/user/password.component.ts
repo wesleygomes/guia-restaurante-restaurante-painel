@@ -26,12 +26,8 @@ export class PasswordComponent {
         if (this.user.password && this.user.password === this.user.password_confirmation) {
             this.authService.builder().changePassword(this.user)
                 .then(() => {
-                    window.Materialize.toast('Salvo com sucesso', 3000);
-                })
-                .then(() => {
-                    this.router.navigate(['/dashboard']);
-                })
-
+                    window.Materialize.toast('Salvo cm sucesso', 3000);
+                });
         } else {
             window.Materialize.toast('Verifique a senha', 3000, 'red');
         }

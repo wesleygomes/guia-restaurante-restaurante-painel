@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormControl } from '@angular/forms';
+
 import * as jQuery from 'jquery';
 
 import { DishesService } from "../../services/dishes.service";
@@ -13,6 +15,7 @@ export class EditDisheComponent implements OnInit {
 
     dish: any = {};
     restaurant_id: string;
+    update_prato: string = 'Salvar';
 
     constructor(
         private router: Router,
@@ -42,7 +45,7 @@ export class EditDisheComponent implements OnInit {
         this.dish.photo = e.target.files[0];
     }
 
-    save(e) {
+    save(e, frm: FormControl) {
         e.preventDefault();
         let formData = this.dish;
 
@@ -55,14 +58,16 @@ export class EditDisheComponent implements OnInit {
             formData.append('restaurant_id', this.dish.restaurant_id);
         }
 
+        this.update_prato = 'Salvando...';
+
         this.dishesService.builder()
             .update(this.dish.id, formData)
             .then(() => {
+                this.update_prato = 'Salvar';
                 this.dishesService.eventEmiter.emit();
                 jQuery('.modal').modal("close");
                 window.Materialize.toast('Salvo com sucesso!', 3000, 'rounded');
             });
     }
 
-    
 }

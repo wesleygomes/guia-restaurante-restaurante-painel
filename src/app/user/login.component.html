@@ -11,7 +11,7 @@
                         <input type="password" placeholder="Sua senha..." id="password" name="password" [(ngModel)]="user.password">
                     </div>
                     <div class="input-field">
-                        <input type="submit" value="Acessar" class="btn">
+                        <input type="submit" [value]="acessar" class ="btn " [ngClass]="{'disabled': acessar === 'Validando....'}">
                     </div>
                 </form>
             </div>
