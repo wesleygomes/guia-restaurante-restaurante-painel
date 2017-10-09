@@ -47,9 +47,7 @@ export class LoginComponent {
         }
         this.authService.login(data)
             .then((res) => {
-                this.acessar = 'Acessar';
-                document.cookie = "token=" + res.access_token + "; expires=" + res.expires_in;
-                this.authService.setAccessToken();
+                this.acessar = 'Acessar';                
                 this.router.navigate(['/']);
             }).catch(() => {
                 this.acessar = 'Acessar';
