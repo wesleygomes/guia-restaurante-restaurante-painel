@@ -371,7 +371,8 @@ module.exports = {
     new GlobCopyWebpackPlugin({
       "patterns": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        'firebase-messaging-sw.js'
       ],
       "globOptions": {
         "cwd": path.join(process.cwd(), "src"),
@@ -452,8 +453,8 @@ module.exports = {
       "mainPath": "main.ts",
       "replaceExport": false,
       "hostReplacementPaths": {
-        //"environments/environment.ts": "environments/environment.ts"
-        "environments/environment.ts": "environments/environment.prod.ts"
+        "environments/environment.ts": "environments/environment.ts"
+        //"environments/environment.ts": "environments/environment.prod.ts"
       },
       "exclude": [],
       "tsConfigPath": "src/tsconfig.app.json",

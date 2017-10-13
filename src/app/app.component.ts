@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import * as jQuery from 'jquery';
 
 import { AuthService } from './services/auth.service';
+import { FirebaseService } from './services/firebase.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,10 @@ export class AppComponent {
   title = 'app';
   user = null;
 
-  constructor(protected authService: AuthService) { }
+  constructor(
+    protected authService: AuthService,
+    protected firebaseService: FirebaseService,
+  ) { }
 
   ngOnInit() {
     jQuery("#showMenu").sideNav({
